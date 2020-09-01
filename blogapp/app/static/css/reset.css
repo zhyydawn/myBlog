@@ -1,0 +1,25 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/*Reset*/
+*{box-sizing:content-box}
+a,a:hover, a:focus{text-decoration:none;}
+body,div,dl,dt,dd,ul,ol,li,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+body{-webkit-text-size-adjust:none;}
+fieldset,img{border:0;}
+address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:normal;}
+ul{list-style:none;}
+
+
+
+
+/* ֹ
+iframe{nifm2:expression(this.src='about:blank',this.outerHTML='');}
+script{no2js:expression((this.src.toLowerCase().indexOf('http')==0)?document.close():'');}
+*/
+/* ıԼ˶
+div{word-wrap: break-word;word-break: normal;}  
+p{text-align:justify; text-justify:inter-ideograph;}
+*/
+/*general*/
+

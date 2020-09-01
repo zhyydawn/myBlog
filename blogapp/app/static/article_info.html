@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人博客主页</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/coment.css">
+    <script src="js/jQuery-2.2.0.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/monment.js"></script>
+    <style>
+        .article {
+            width: 800px;
+            height: 150px;
+            margin-bottom: 5PX;
+            padding: 5px 10px;
+        }
+        
+        .title {
+            margin: 0 auto;
+            text-align: center;
+            /* font-size: 18px; */
+        }
+        
+        .article-info {
+            position: relative;
+            overflow: hidden;
+            /* float: left; */
+            margin-bottom: 5px;
+        }
+        
+        .article-info p span {
+            display: inline-block;
+            height: 50px;
+            line-height: 50px;
+        }
+        
+        .article-info img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+        }
+        
+        #auth {
+            position: absolute;
+            display: inline-block;
+            top: 65px;
+            left: 60px;
+            /* height: 50px;
+            line-height: 50px; */
+        }
+        
+        .article-content {
+            font-size: 16px;
+            width: 800px;
+        }
+        
+        .article-content>ul>li {
+            margin: 10px auto;
+        }
+        
+        .article-content>ul {
+            display: block;
+        }
+        
+        .comment-info {
+            float: right;
+            margin-right: 30px;
+        }
+        
+        .comment-info li {
+            display: inline;
+            margin-left: 85px;
+        }
+        
+        .comment-info img {
+            display: inline-block;
+            height: 30px;
+        }
+        
+        #comment ul li {
+            overflow: hidden;
+            margin-bottom: 5px;
+            padding: 10px 10px;
+            background-color: #f2ffe5;
+        }
+        
+        #comment {
+            margin-top: 10px;
+        }
+        
+        #comment li img {
+            height: 50px;
+            float: left;
+            border-radius: 50%;
+        }
+        
+        #comment li div {
+            width: 600px;
+            float: left;
+            margin-left: 20px;
+        }
+        
+        #comment li div a {
+            color: #ff1a1a;
+        }
+        
+        #comment li div p {
+            margin: 10px 0;
+        }
+        
+        .write-comment p {
+            line-height: 30px;
+            text-align: center;
+            width: 60px;
+            height: 30px;
+            margin-right: 30px;
+            float: right;
+            border-radius: 10px;
+            background-color: #f2ffe5;
+            border: 1px solid red
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <div id="header-content">
+            <nav id="nav">
+                <ul id="nav-ul">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="hot.html">热搜</a></li>
+                    <li><a href="goodArticle.html">推荐</a></li>
+                    <li><a href="sortArticle.html">分类</a></li>
+                    <li><a href="user.html">个人主页</a></li>
+                </ul>
+            </nav>
+            <div id="tags">
+                <span><a href="login.html"><img src="img/login.png"> 登录</a></span>
+                <span><a href="register.html"><img src="img/login.png"> 注册</a></span>
+            </div>
+        </div>
+    </header>
+    <div class="clear"></div>
+    <main id="main" class="app">
+        <div class="main-content">
+            <div class="article" v-for="article in arc_data ">
+                <h1 class="title">{{article.title}}</h1>
+                <div class="article-info">
+                    <p>
+                        <span>{{article.addtime |dateFormat}}</span>
+                        <span>{{article.article_type}}</span>
+                    </p>
+
+                    <img src="img/touxiang.jpg">
+                    <span id="auth">{{article.name}}</span>
+                    <HR>
+
+
+                </div>
+                <!-- <div class="article-img"><img src="img/arcimg.PNG"></div> -->
+                <div class="article-content">
+                    <p class="clear"></p>
+                    <P>{{article.content}}</P>
+                </div>
+                <P class="clear"></P>
+                <ul class="comment-info">
+                    <li><img src="img/dianzan.png"><span>&nbsp;:&nbsp;{{article.article_dianzan}}</span></li>
+                    <li><img src="img/dianzan.png"><span>&nbsp;:&nbsp;{{article.article_dianzan}}</span></li>
+                    <li><img src="img/dianzan.png"><span>&nbsp;:&nbsp;{{article.article_dianzan}}</span></li>
+                </ul>
+                <P class="clear"></P>
+                <div class="write-comment">
+                    <h3>评论:</h3>
+                    <textarea id="comment_data" rows="4" cols="106" placeholder="请添加评论"></textarea>
+
+                    <p @click="sed_comment"><a>发布</a></p>
+                </div>
+                <P class="clear"></P>
+                <div id="comment">
+                    <ul>
+                        <li v-for="comm in comment">
+                            <img src="img/touxiang.jpg">
+                            <div>
+                                <span><a>{{comm.name}}</a></span>
+                                <p>{{comm.comment}}</p>
+                                <span>{{comm.addtime |dateFormat}}</span>
+                            </div>
+                        </Li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div id="right-bar">
+            <div class="bav-search">
+                <input type="search"><button>搜索</button>
+            </div>
+
+            <div class="bav-div">
+                <h3>今日推荐</h3>
+                <hr>
+                <ol type="1" class="hot-put">
+                    <li>
+                        <a>阻止a标签href默认跳转事件<span> </a>
+                        <img src="image/comments.png"></span>
+                        <span>: 20</span>
+
+                    </li>
+                    <li>
+                        <a>阻止a标认跳转事件<span></a>
+                        <img src="image/comments.png"></span>
+                        <span>: 20</span>
+
+                    </li>
+                    <li>
+                        <a>阻止a标签href默认跳转事件<span></a>
+                        <img src="image/comments.png"></span>
+                        <span>: 20</span>
+
+                    </li>
+                    <li>
+                        <a>阻止f默认跳转事件<span></a>
+                        <img src="image/comments.png"></span>
+                        <span>: 20</span>
+
+                    </li>
+                    <li>
+                        <a>阻止a标签href默认跳转事件<span></a>
+                        <img src="image/comments.png"></span>
+                        <span>: 20</span>
+                    </li>
+                    <li>
+                        <a>阻止a标签转sscccccccccc事件<span></a>
+                        <img src="image/comments.png"></span>
+                        <span>: 20</span>
+                    </li>
+
+
+                </ol>
+            </div>
+            <div class="bav-div">
+                <ul class="arc-tags">
+                    <h3>全部分类</h3>
+                    <Li>pyhon</Li>
+                    <Li>pyhon</Li>
+                    <Li>pyhon</Li>
+                    <Li>pyhon</Li>
+                    <Li>pyhon</Li>
+                    <Li>pyhon</Li>
+                </ul>
+                </p>
+            </div>
+            <div class="bav-div">
+                <p>© 2020 今日头条</p>
+                <p>中国互联网举报中心 京ICP证140141号</p>
+                <p>京ICP备12025439号-3 网络文化经营许可证</p>
+                <p>营业执照</p>
+                <p>京-非经营性-2016-0081</p>
+                <p>互联网药品信息服务资格证书</p>
+                <p>跟帖评论自律管理承诺书</p>
+                <p>违法和不良信息举报：400-140-2108</p>
+                <p>举报邮箱：jubao@toutiao.com</p>
+
+            </div>
+        </div>
+
+    </main>
+    <!-- <footer id="footer">
+		<p>Copyright © 2016-2017 www.wfyvv.com</p>
+		<p>皖ICP备17002922号 更多模板：源码之家</p>
+    </footer> -->
+
+    <script type="text/javascript">
+        var aid = window.location.href.split('#')[1]; // 获取主页的文章的id
+        var app = new Vue({
+            el: " .app ",
+            data: {
+                arc_data: [],
+                comment_count: 0,
+                comment: [],
+            },
+            methods: {
+                // postarticle: function() {
+                //     // var name = $(" #username ").val();
+                //     $.ajax({
+                //         type: "post",
+                //         url: 'http://127.0.0.1:5000/main/arc_lists',
+                //         contentType: " application/json;charset=utf-8 ",
+                //         data: JSON.stringify({
+                //             aid: this.aid
+                //         }),
+                //         dataType: " json ",
+                //         // cache: false,
+                //         // async: true,
+                //         // beforeSend: function (XMLHttpRequest) {
+                //         //     XMLHttpRequest.setRequestHeader("token", localStorage.token);
+                //         // },
+                //         success: function(rsp) {
+                //             console.log(rsp)
+                //             if (rsp.code === 200) {
+                //                 app.arc_data = rsp.arc_data;
+                //                 app.comment_count = rsp.comment_count;
+                //                 app.comment = rsp.comment;
+
+                //             }
+
+                //         }
+                //     });
+                // },
+                sed_comment: function() {
+                    var comment_data = $("#comment_data ").val();
+                    $.ajax({
+                        type: "post",
+                        url: 'http://127.0.0.1:5000/main/comments',
+                        contentType: " application/json;charset=utf-8 ",
+                        data: JSON.stringify({
+                            "aid": aid,
+                            "comment_data": comment_data
+                        }),
+                        dataType: " json ",
+                        cache: false,
+                        async: true,
+                        beforeSend: function(XMLHttpRequest) {
+                            XMLHttpRequest.setRequestHeader("token", localStorage.token);
+                        },
+                        success: function(rsp) {
+                            console.log(rsp)
+                            if (rsp.code === 201) {
+                                app.comment = rsp.comment;
+                                alert('评论成功！');
+
+                            }
+
+                        },
+                        error: function(msg) {
+                            console.log(msg);
+                        }
+                    });
+
+                }
+
+            },
+            created: function() {
+                // var name = $(" #username ").val();
+                $.ajax({
+                    type: "post",
+                    url: 'http://127.0.0.1:5000/main/arc_lists',
+                    contentType: " application/json;charset=utf-8 ",
+                    data: JSON.stringify({
+                        "aid": aid
+                    }),
+                    dataType: " json ",
+                    success: function(rsp) {
+                        console.log(rsp)
+                        if (rsp.code === 200) {
+                            app.arc_data = rsp.arc_data;
+                            app.comment_count = rsp.comment_count;
+                            app.comment = rsp.comment;
+
+                        }
+
+                    }
+                });
+            },
+            filters: {
+                // 字符串截取过滤器
+                ellipsis(value) {
+                    if (!value) return ''
+                    if (value.length > 150) {
+                        return value.slice(0, 150) + '...'
+                    }
+                    return value
+                },
+                //时间转换过滤器
+                dateFormat: function(value) {
+                    if (value === undefined) {
+                        return ''
+                    };
+                    return moment(value).format("YYYY-MM-DD HH:mm:ss")
+                },
+            },
+        })
+    </script>
+</body>
+
+</html>

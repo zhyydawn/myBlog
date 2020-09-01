@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mycomment</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/coment.css">
+    <link rel="stylesheet" type="text/css" href="css/users.css">
+    <script src="js/jQuery-2.2.0.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/monment.js"></script>
+    <style>
+        .article {
+            width: 820px;
+            height: 150px;
+            background-color: #f2ffe5;
+            margin-bottom: 5PX;
+            padding: 5px 10px;
+        }
+        
+        #article-top h1,
+        #article-top p {
+            display: inline-block;
+        }
+        
+        #article-top h1 {
+            margin-left: 30px;
+        }
+        
+        #article-top p {
+            margin-left: 100px;
+        }
+        
+        .com-list {
+            padding: 0 25px;
+            background-color: #f2ffe5;
+        }
+        
+        .com-list li {
+            line-height: 50px;
+            height: 50px;
+            border-bottom: 1px dotted #999999;
+        }
+        
+        .com-list li span {
+            width: 200px;
+            margin: 5px auto;
+            display: inline-block;
+        }
+        
+        .com-list li span:first-child {
+            width: 150px;
+        }
+        
+        .com-list li a {
+            display: block;
+            float: right;
+            margin-right: 50px;
+        }
+        
+        .search {
+            width: 300px;
+            height: 40px;
+            margin: 10px 10px 0 200px;
+            background-color: #333333;
+        }
+        
+        .search input {
+            height: 36px;
+            width: 250px;
+            border: 1px #333333 solid;
+        }
+        
+        .search button {
+            height: 36px;
+            width: 30px;
+            border: 1px #333333 solid;
+            background-color: #333333;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <div id="header-content">
+            <nav id="nav">
+                <ul id="nav-ul">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="hot.html">热搜</a></li>
+                    <li><a href="goodArticle.html">推荐</a></li>
+                    <li><a href="sortArticle.html">分类</a></li>
+                    <li><a href="user.html">个人主页</a></li>
+                </ul>
+            </nav>
+            <div id="tags">
+                <span><a href="login.html"><img src="img/login.png"> 登录</a></span>
+                <span><a href="register.html"><img src="img/login.png"> 注册</a></span>
+            </div>
+        </div>
+    </header>
+    <div class="clear"></div>
+    <main id="main">
+        <div id="left-bar">
+            <h3><a href="user.html">个人主页</a></h3>
+            <ul id="bar-nav">
+                <li><a href="user.html">个人资料</a></li>
+                <li><a href="myarticle.html">我的文章</a></li>
+                <li><a href="mycomment.html">我的评论</a></li>
+                <li><a href="mycollection.html">我的收藏</a></li>
+                <li><a href="myfans.html">我的粉丝</a></li>
+                <li><a href="myfocus.html">我的关注</a></li>
+        </div>
+        <div id="reight-bar">
+            <div id="article-top">
+                <h1>我的评论</h1>
+                <p class="search"><input type="search"><button>搜索</button></p>
+            </div>
+            <div class="clear">
+                <hr>
+            </div>
+            <ul class="com-list">
+                <li><span>评论</span><span>时间</span><span>文章标题</span><a>删除</a></li>
+                <li v-for="com in comments"><span>{{com.comment}}</span><span>{{com.addtime |dateFormat}}</span><span>{{com.id}}</span><a>删除</a></li>
+            </ul>
+
+        </div>
+    </main>
+    <footer id="footer">
+        <p>Copyright © 2016-2017 www.wfyvv.com</p>
+        <p>皖ICP备17002922号 更多模板：源码之家</p>
+    </footer>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: "#main",
+            data: {
+                comments: [],
+
+            },
+            methods: {
+
+            },
+            filters: {
+                // 字符串截取过滤器
+                ellipsis(value) {
+                    if (!value) return ''
+                    if (value.length > 120) {
+                        return value.slice(0, 120) + '...'
+                    }
+                    return value
+                },
+                //时间转换过滤器
+                dateFormat: function(value) {
+                    if (value === undefined) {
+                        return ''
+                    };
+                    return moment(value).format("YYYY-MM-DD HH:mm:ss")
+                },
+            },
+            created: function() {
+                // var name = $(" #username ").val();
+                $.ajax({
+                    type: "post",
+                    url: 'http://127.0.0.1:5000/main/users/comments',
+                    contentType: " application/json;charset=utf-8 ",
+                    data: JSON.stringify({
+
+                    }),
+                    dataType: " json ",
+                    cache: false,
+                    async: true,
+                    beforeSend: function(XMLHttpRequest) {
+                        XMLHttpRequest.setRequestHeader("token", localStorage.token);
+                    },
+                    success: function(rsp) {
+                        console.log(rsp.com_data)
+                        if (rsp.code === 200) {
+                            app.comments = rsp.com_data;
+
+                        }
+
+                    }
+                });
+            }
+
+        })
+    </script>
+</body>
+
+</html>

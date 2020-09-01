@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myarticle</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/coment.css">
+    <link rel="stylesheet" type="text/css" href="css/users.css">
+    <script src="js/jQuery-2.2.0.min.js"></script>
+    <script src="js/vue.js"></script>
+    <style>
+        .article {
+            width: 800px;
+            height: 150px;
+            background-color: #f2ffe5;
+            margin-bottom: 5PX;
+            padding: 5px 10px;
+        }
+        
+        .article-img {
+            width: 120px;
+            height: 120px;
+            padding-top: 20px;
+            float: left;
+        }
+        
+        .article-img>img {
+            width: 120px;
+            height: 100px;
+        }
+        
+        .article-content {
+            font-size: 16px;
+            width: 640px;
+            height: 140px;
+            margin-left: 20px;
+            float: right;
+        }
+        
+        .article-content>ul>li {
+            margin: 10px auto;
+        }
+        
+        .article-content>ul {
+            display: block;
+        }
+        
+        .title {
+            font-size: 18px;
+        }
+        
+        .article-info {
+            float: left;
+        }
+        
+        .article-info span {
+            margin-right: 15px;
+        }
+        
+        .comment-info {
+            float: right;
+        }
+        
+        #article-top h1,
+        #article-top p {
+            display: inline-block;
+        }
+        
+        #article-top h1 {
+            margin-left: 30px;
+        }
+        
+        #article-top p {
+            margin-left: 100px;
+        }
+        
+        .search {
+            width: 300px;
+            height: 40px;
+            margin: 10px 10px 0 200px;
+            background-color: #333333;
+        }
+        
+        .search input {
+            height: 36px;
+            width: 250px;
+            border: 1px #333333 solid;
+        }
+        
+        .search button {
+            height: 36px;
+            width: 30px;
+            border: 1px #333333 solid;
+            background-color: #333333;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <div id="header-content">
+            <nav id="nav">
+                <ul id="nav-ul">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="hot.html">热搜</a></li>
+                    <li><a href="goodArticle.html">推荐</a></li>
+                    <li><a href="sortArticle.html">分类</a></li>
+                    <li><a href="user.html">个人主页</a></li>
+                </ul>
+            </nav>
+            <div id="tags">
+                <span><a href="login.html"><img src="img/login.png"> 登录</a></span>
+                <span><a href="register.html"><img src="img/login.png"> 注册</a></span>
+            </div>
+        </div>
+    </header>
+    <div class="clear"></div>
+    <main id="main">
+        <div id="left-bar">
+            <h3><a href="user.html">个人主页</a></h3>
+            <ul id="bar-nav">
+                <li><a href="user.html">个人资料</a></li>
+                <li><a href="myarticle.html">我的文章</a></li>
+                <li><a href="mycomment.html">我的评论</a></li>
+                <li><a href="mycollection.html">我的收藏</a></li>
+                <li><a href="myfans.html">我的粉丝</a></li>
+                <li><a href="myfocus.html">我的关注</a></li>
+        </div>
+        <div id="reight-bar">
+            <div id="article-top">
+                <h1>我的收藏</h1>
+                <p class="search"><input type="search"><button>搜索</button></p>
+            </div>
+            <hr>
+            <div class="article">
+                <div class="article-img"><img src="img/arcimg.PNG"></div>
+                <div class="article-content">
+                    <ul>
+                        <li class="title">
+                            <h3><a href="#">个人博客应该选择什么样的域名和域名后缀</a></h3>
+                        </li>
+                        <li>
+                            <div class="article-info">
+                                <span>夏天的风</span>
+                                <span>2020.8.20</span>
+                                <span>phthon web</span>
+                            </div>
+                            <div class="comment-info">
+                                <span>点赞</span>
+                                <span>评论</span>
+                            </div>
+                        </li>
+                        <p class="clear"></p>
+                        <li>
+                            <P>不论搭建什么样的网站，选择一个好的域名都是很有必要的， 选择一个好的域名对网站的意义也是不言而喻的。每一个网站都有之对应的域名， 就像人的名字一样。
+                            </P>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer id="footer">
+        <p>Copyright © 2016-2017 www.wfyvv.com</p>
+        <p>皖ICP备17002922号 更多模板：源码之家</p>
+    </footer>
+</body>
+
+</html>

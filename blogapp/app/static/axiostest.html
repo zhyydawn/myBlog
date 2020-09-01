@@ -1,0 +1,176 @@
+1
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/vue.js"></script>
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="app">
+        <form>
+            <input type="text" name="name">
+            <input type="number" name="age">
+            <input type="submit" id="btn4">
+        </form>
+        <button id="btn" @click="postdata">post-json</button>
+        <ol>
+            <li v-for="user in users">
+                <span>{{user.name}}</span>
+                <span>{{user.age}}</span>
+                <span>{{user.job}}</span>
+                <span>{{user.class}}</span>
+            </li>
+        </ol>
+        <ul>
+            <li v-for="a in aa">
+                <span>{{a.title}}</span>
+                <span>{{a.content}}</span>
+                <span>{{a.name}}</span>
+                <span>{{a.addtime}}</span>
+            </li>
+        </ul>
+    </div>
+
+    <script src="js/particles.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/jQuery-2.2.0.min.js"></script>
+    <script type="text/javascript">
+        function posttest() {
+            var name = $("#username").val();
+            var phone = $("#phone").val();
+            var email = $("#email").val();
+            var password = $("#password").val();
+            var password2 = $("#pwd2").val();
+            $.ajax({
+                type: "post",
+                url: 'http://127.0.0.1:5000/auth/test',
+                contentType: "application/json;charset=utf-8",
+                data: JSON.stringify({
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    password: password,
+                    password2: password2
+                }),
+                dataType: "json",
+                success: function(data) {
+                    console.log(data)
+                    if (data.code === 200) {
+                        alert(data.msg);
+                    }
+
+                }
+            });
+        }
+
+
+
+        var userdata = [{
+            name: 'jack1',
+            age: 20,
+            job: 'web开发1',
+            class: 'p8'
+        }, {
+            name: 'jack2',
+            age: 30,
+            job: 'web开发2',
+            class: 'p3'
+        }, {
+            name: 'jack3',
+            age: 20,
+            job: 'web开发3',
+            class: 'p5'
+        }, {
+            name: 'jack4',
+            age: 30,
+            job: 'web开发4',
+            class: 'p8'
+        }, {
+            name: 'jack5',
+            age: 40,
+            job: 'web开发5',
+            class: 'p9'
+        }, ]
+
+
+        // // 发送 POST 请求
+        // btn5.onclick = function() {
+        //     axios({
+        //             method: 'post',
+        //             url: 'http://127.0.0.1:5000/args',
+        //             heades: {
+        //                 'Content-Type': 'application/x-www-form-urlencoded'
+        //             },
+        //             parms: {
+        //                 name: 'Fred',
+        //                 age: 25
+        //             }
+        //         })
+        //         .then(function(response) {
+        //             console.log(response.data);
+        //         })
+        //         .catch(function(error) {
+        //             console.log(error);
+        //         });
+        // };
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                users: {},
+                aa: [{
+                    addtime: "Sun, 16 Aug 2020 18:59:36 GMT",
+                    content: "abcd",
+                    id: 1,
+                    name: "admin",
+                    title: "flask"
+                }, {
+                    addtime: "Sun, 16 Aug 2020 19:07:10 GMT",
+                    content: "为了保护路由只让认证用户访问，Flask-Login 提供了一个login_required 修饰器。用法演示如下：from flask.ext.login import login_required@app.route('/secret')@login_requireddef secret():return 'Only authenticated users are allowed!'如果未认证的用户访问这个路由，Flask-Login 会拦截请求，把用户发往登录页面。",
+                    id: 2,
+                    name: "admin",
+                    title: "保护路由"
+                }, ],
+            },
+            methods: {
+                postdata: function() {
+                    // var name = $("#username").val();
+                    // var phone = $("#phone").val();
+                    // var email = $("#email").val();
+                    // var password = $("#password").val();
+                    // var password2 = $("#pwd2").val();
+                    $.ajax({
+                        type: "post",
+                        url: 'http://127.0.0.1:5000/auth/test',
+                        contentType: "application/json;charset=utf-8",
+                        data: JSON.stringify({
+                            userdata
+                        }),
+                        dataType: "json",
+                        success: function(rsp) {
+                            console.log(rsp)
+                            if (rsp.code === 200) {
+                                alert(rsp.data.userdata);
+                                app.users = rsp.data.userdata;
+                                alert(app.users);
+
+                            }
+
+                        }
+                    });
+                }
+
+            }
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+2020-08-25 11:20:33,092--ERROR--users.py[lines:15]--test--division by zero
+2020-08-25 11:47:24,422--ERROR--users.py[lines:15]--test--division by zero
+2020-08-25 12:04:53,214--ERROR--token_auth.py[lines:23]--verify_password--token is none
+2020-08-25 12:04:53,216--ERROR--users.py[lines:15]--test--division by zero
+2020-08-25 12:11:23,916--ERROR--token_auth.py[lines:23]--verify_password--token is none
+2020-08-25 12:12:49,648--ERROR--token_auth.py[lines:40]--verify_auth_token--<class 'itsdangerous.exc.BadSignature'>
+2020-08-25 12:30:00,133--ERROR--token_auth.py[lines:40]--verify_auth_token--<class 'TypeError'>
+2020-08-25 12:42:06,234--ERROR--token_auth.py[lines:40]--verify_auth_token--("argument of type 'NoneType' is not iterable",)
+2020-08-25 12:44:10,670--ERROR--token_auth.py[lines:40]--verify_auth_token--{TypeError("argument of type 'NoneType' is not iterable"): ("argument of type 'NoneType' is not iterable",)}
+2020-08-25 12:44:56,864--ERROR--token_auth.py[lines:40]--verify_auth_token--argument of type 'NoneType' is not iterable
+2020-08-25 12:48:27,884--ERROR--token_auth.py[lines:40]--verify_auth_token--argument of type 'NoneType' is not iterable
+2020-08-25 12:50:21,423--ERROR--token_auth.py[lines:40]--verify_auth_token--{TypeError("argument of type 'NoneType' is not iterable"): ("argument of type 'NoneType' is not iterable",)}
+2020-08-25 12:50:52,378--ERROR--token_auth.py[lines:40]--verify_auth_token--{TypeError("argument of type 'NoneType' is not iterable")}
+2020-08-25 12:57:37,393--ERROR--token_auth.py[lines:40]--verify_auth_token--{TypeError("argument of type 'NoneType' is not iterable")}
+2020-08-25 18:06:46,289--ERROR--token_auth.py[lines:34]--verify_auth_token--argument of type 'NoneType' is not iterable

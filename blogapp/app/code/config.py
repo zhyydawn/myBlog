@@ -1,0 +1,7 @@
+#邮箱配置
+MAIL_SERVER='smtp.qq.com'
+MAIL_PORT=''
+MAIL_USE_TLS=True
+MAIL_USERNAME=''
+MAIL_PASSWORD=''
+

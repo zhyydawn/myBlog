@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jQuery-2.2.0.min.js"></script>
+    <script src="js/gener_uuid.js"></script>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <img id='code-img' src="code_img/e994ef3b-5605-47cc-b61a-92e0f08ab45d.png">
+        <img id='code-img' v-bind:src="code_img" style="width: 100px;height:30px">
+        <button id='btn' @click="getcodeimg">获取验证码</button>
+    </div>
+    <script>
+        var img_code_id = generateUUID()
+        var app = new Vue({
+            el: "#app",
+            data: {
+                code_img: 'code_img/' + String(img_code_id) + ".png"
+            },
+            methods: {
+                getcodeimg: function() {
+                    $.ajax({
+                        type: "get",
+                        url: 'http://127.0.0.1:5000/code/get_img_code',
+                        // contentType: "application/json;charset=utf-8",
+                        data: {
+                            img_code_id: img_code_id
+                        },
+                        // dataType: "json",
+                        success: function(rsp) {
+                            console.log(rsp)
+                            if (rsp.code === 200) {
+                                alert(this.code_img)
+                            }
+
+                        }
+                    });
+                }
+
+
+            }
+        })
+    </script>
+</body>
+
+</html>

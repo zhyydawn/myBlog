@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user-index</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/coment.css">
+    <link rel="stylesheet" type="text/css" href="css/users.css">
+    <script src="js/jQuery-2.2.0.min.js"></script>
+    <script src="js/vue.js"></script>
+    <style>
+        #user-top {
+            width: 800px;
+            height: 100px;
+            font-size: 16px;
+        }
+        
+        #user-top li {
+            display: block;
+        }
+        
+        #user-top li:nth-child(1) {
+            float: left;
+            width: 100px;
+            height: 100px;
+        }
+        
+        #user-top li:nth-child(1) img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 10px 15px 5px 15px;
+        }
+        
+        #user-top li:nth-child(1) p {
+            margin: 0 15px;
+        }
+        
+        #user-top li:nth-child(2) {
+            /* margin: 30px ; */
+            margin: 30px 0 10px 30px;
+            float: left;
+            width: 300px;
+        }
+        
+        #user-top li:nth-child(2) div {
+            margin-top: 10px;
+        }
+        
+        #user-top li:nth-child(3) {
+            float: right;
+            margin: 30px;
+            width: 300px;
+            margin-bottom: 30px;
+        }
+        
+        #user-top li:nth-child(3) span {
+            margin-left: 30px;
+        }
+        
+        #user-info {
+            font-size: 16px;
+            float: left;
+            margin: 10px 200px;
+        }
+        
+        #user-info li {
+            margin: 20px auto;
+        }
+        
+        #footer {
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            background-color: #333333;
+            color: #e2d0d0;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <div id="header-content">
+            <nav id="nav">
+                <ul id="nav-ul">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="hot.html">热搜</a></li>
+                    <li><a href="goodArticle.html">推荐</a></li>
+                    <li><a href="sortArticle.html">分类</a></li>
+                    <li><a href="user.html">个人主页</a></li>
+                </ul>
+            </nav>
+            <div id="tags">
+                <span><a href="login.html"><img src="img/login.png"> 登录</a></span>
+                <span><a href="register.html"><img src="img/login.png"> 注册</a></span>
+            </div>
+        </div>
+    </header>
+    <div class="clear"></div>
+    <main id="main">
+        <div id="left-bar">
+            <h3><a href="user.html">个人主页</a></h3>
+            <ul id="bar-nav">
+                <li><a href="user.html">个人资料</a></li>
+                <li><a href="myarticle.html">我的文章</a></li>
+                <li><a href="mycomment.html">我的评论</a></li>
+                <li><a href="mycollection.html">我的收藏</a></li>
+                <li><a href="myfans.html">我的粉丝</a></li>
+                <li><a href="myfocus.html">我的关注</a></li>
+            </ul>
+        </div>
+        <div id="reight-bar">
+            <h1>个人资料</h1>
+            <hr>
+            <ul id="user-top">
+                <li>
+                    <img class="touxiang" src="img/touxiang.jpg">
+                    <p><a href="changeimg.html">修改图像</a></p>
+                </li>
+                <li>
+                    <p>ID:1234567890</p>
+                    <div>
+                        <span>关注：20</span>
+                        <span>粉丝：20</span>
+                    </div>
+                </li>
+                <li>
+                    <span><a href="changeuser.html">修改资料</a></span>
+                    <span><a href="#">账号安全</a></span>
+                    <span><a href="#">个人主页</a></span>
+                </li>
+            </ul>
+            <p class="clear">
+                <hr>
+            </p>
+            <ul id="user-info">
+                <li>昵称：zhyy</li>
+                <li>性别：男</li>
+                <li>生日：1993.09.16</li>
+                <li>学校：</li>
+                <li>公司：</li>
+                <li>邮箱：</li>
+                <li>手机：</li>
+            </ul>
+        </div>
+    </main>
+    <footer id="footer">
+        <p>Copyright © 2016-2017 www.wfyvv.com</p>
+        <p>皖ICP备17002922号 更多模板：源码之家</p>
+    </footer>
+
+    <!-- scripts -->
+    <script src="js/particles.min.js"></script>
+    <script src="js/jQuery-2.2.0.min.js"></script>
+    <script src="js/app.js"></script>
+    <script type="text/javascript">
+        changeimg.onclick = function() {
+            var name = $("#name").val();
+            var password = $("#password").val();
+            $.ajax({
+                type: "post",
+                url: 'http://127.0.0.1:5000/login',
+                contentType: "application/json;charset=utf-8",
+                data: JSON.stringify({
+                    name: name,
+                    password: password
+                }),
+                dataType: "json",
+                success: function(data) {
+                    if (data.code === 0) {
+                        window.location.href = "index.html"
+                    }
+                }
+            });
+        }
+
+
+        // new Vue({
+        // el:'#particles-js',
+        // data:{
+        //     name:'',
+        //     password:''
+        // },
+        // methods:{
+        // function(){
+        // $.ajax({
+        //             type: "post",
+        //             url: 'http://127.0.0.1:5000/login',
+        //             contentType: "application/json;charset=utf-8",
+        //             data: JSON.stringify({name:this.name,password:this.password}),
+        //             dataType: "json",
+        //             success: function (data) {
+        //                 console.log(data);
+        //             }
+        //         });
+        //     }
+
+        // }
+        // })
+    </script>
+</body>
+
+</html>

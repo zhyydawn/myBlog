@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user-index</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/coment.css">
+    <link rel="stylesheet" type="text/css" href="css/users.css">
+    <script src="js/jQuery-2.2.0.min.js"></script>
+    <script src="js/vue.js"></script>
+    <style>
+        #user-top {
+            width: 800px;
+            height: 100px;
+            font-size: 16px;
+        }
+        
+        #user-top li {
+            display: block;
+        }
+        
+        #user-top li:nth-child(1) {
+            float: left;
+            width: 100px;
+            height: 100px;
+        }
+        
+        #user-top li:nth-child(1) img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 10px 15px 5px 15px;
+        }
+        
+        #user-top li:nth-child(1) p {
+            margin: 0 15px;
+        }
+        
+        #user-top li:nth-child(2) {
+            /* margin: 30px ; */
+            margin: 30px 0 10px 30px;
+            float: left;
+            width: 300px;
+        }
+        
+        #user-top li:nth-child(2) div {
+            margin-top: 10px;
+        }
+        
+        #user-top li:nth-child(3) {
+            float: right;
+            margin: 30px;
+            width: 300px;
+            margin-bottom: 30px;
+        }
+        
+        #user-top li:nth-child(3) span {
+            margin-left: 30px;
+        }
+        
+        #user-info {
+            font-size: 16px;
+            float: left;
+            margin: 10px 200px;
+        }
+        
+        #user-info li {
+            margin: 20px auto;
+        }
+        
+        #footer {
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            background-color: #333333;
+            color: #e2d0d0;
+        }
+        
+        .search {
+            width: 300px;
+            height: 40px;
+            background-color: #333333;
+        }
+        
+        .search input {
+            height: 36px;
+            width: 250px;
+            color: white;
+        }
+        
+        .search button {
+            height: 36px;
+            width: 35px;
+            background-color: #333333;
+            border: 1px #a5a4a4 solid;
+            color: white;
+        }
+        
+        #user-img {
+            width: 300px;
+            height: 300px;
+        }
+        
+        #user-img img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <div id="header-content">
+            <nav id="nav">
+                <ul id="nav-ul">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="hot.html">热搜</a></li>
+                    <li><a href="goodArticle.html">推荐</a></li>
+                    <li><a href="sortArticle.html">分类</a></li>
+                    <li><a href="user.html">个人主页</a></li>
+                </ul>
+            </nav>
+            <div id="tags">
+                <span><a href="login.html"><img src="img/login.png"> 登录</a></span>
+                <span><a href="register.html"><img src="img/login.png"> 注册</a></span>
+            </div>
+        </div>
+    </header>
+    <div class="clear"></div>
+    <main id="main">
+        <div id="left-bar">
+            <h3><a href="user.html">个人主页</a></h3>
+            <ul id="bar-nav">
+                <li><a href="user.html">个人资料</a></li>
+                <li><a href="myarticle.html">我的文章</a></li>
+                <li><a href="mycomment.html">我的评论</a></li>
+                <li><a href="mycollection.html">我的收藏</a></li>
+                <li><a href="myfans.html">我的粉丝</a></li>
+                <li><a href="myfocus.html">我的关注</a></li>
+            </ul>
+        </div>
+        <div id="reight-bar">
+            <h1>修改头像</h1>
+            <hr>
+            <div id="user-img"><img name="user-img" src="img/21597650739.png"></div>
+            <P class="clear">
+                <hr>
+            </P>
+            <div class="search">
+                <form id="form" method="POST" enctype="multipart/form-data">
+                    <input type="file" id="file" multiple="multipart">
+                    <input type="button" id="upload" @click="changeimg" value="更改">
+                </form>
+            </div>
+
+        </div>
+    </main>
+    <footer id="footer">
+        <p>Copyright © 2016-2017 www.wfyvv.com</p>
+        <p>皖ICP备17002922号 更多模板：源码之家</p>
+    </footer>
+
+    <!-- scripts -->
+    <script src="js/jQuery-2.2.0.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script type="text/javascript">
+        // var app = new Vue({
+        //     el: '#main',
+        //     data: {
+        //         imgfile: ""
+        //     },
+        //     methods: {
+        //         changeimg: function() {
+        //             // var imgfile = $("#file").val();
+        //             var imgfile = new FormData($("#form")[0])
+        //             var uid = 2
+        //             alert(imgfile)
+        //             alert(uid)
+        //             $.ajax({
+        //                 type: "post",
+        //                 url: 'http://127.0.0.1:5000/auth/changeimg',
+        //                 contentType: "multipart/form-data;",
+        //                 // data: JSON.stringify({
+        //                 //     imgfile: imgfile,
+        //                 //     uid: uid
+
+        //                 // }),
+        //                 data: imgfile,
+
+        //                 dataType: "json",
+        //                 success: function(rsp) {
+        //                     console.log(rsp);
+        //                     if (rsp.code === 201) {
+        //                         // app.imgfile = rsp.data.change_img;
+
+        //                     }
+        //                 }
+        //             });
+        //         }
+
+        //     }
+        // })
+    </script>
+</body>
+
+</html>

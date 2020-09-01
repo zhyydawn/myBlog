@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user-index</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/coment.css">
+    <link rel="stylesheet" type="text/css" href="css/users.css">
+    <script src="js/jQuery-2.2.0.min.js"></script>
+    <script src="js/vue.js"></script>
+    <style>
+
+
+
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <div id="header-content">
+            <nav id="nav">
+                <ul id="nav-ul">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="hot.html">热搜</a></li>
+                    <li><a href="goodArticle.html">推荐</a></li>
+                    <li><a href="sortArticle.html">分类</a></li>
+                    <li><a href="user.html">个人主页</a></li>
+                </ul>
+            </nav>
+            <div id="tags">
+                <span><a href="login.html"><img src="img/login.png"> 登录</a></span>
+                <span><a href="register.html"><img src="img/login.png"> 注册</a></span>
+            </div>
+        </div>
+    </header>
+    <div class="clear"></div>
+    <main id="main">
+        <div id="left-bar">
+            <h3><a href="user.html">个人主页</a></h3>
+            <ul id="bar-nav">
+                <li><a href="user.html">个人资料</a></li>
+                <li><a href="myarticle.html">我的文章</a></li>
+                <li><a href="mycomment.html">我的评论</a></li>
+                <li><a href="mycollection.html">我的收藏</a></li>
+                <li><a href="myfans.html">我的粉丝</a></li>
+                <li><a href="myfocus.html">我的关注</a></li>
+            </ul>
+        </div>
+        <div id="reight-bar">
+            <h1>修改资料</h1>
+            <hr>
+            <ul>
+                <li>
+                    <p><span>昵称：</span><input type="text" id="name"></p>
+                </li>
+                <li>
+                    <p><span>生日：</span><input type="date"></p>
+                </li>
+                <li>
+                    <p><span>性别：</span>
+                        <input type="radio" id="sex-man" name='sex'><label for="sex-man">男</label>
+                        <input type="radio" id="sex-women" name='sex'><label for="sex-women">女</label>
+                    </p>
+                </li>
+                <li>
+                    <p><span>学校：</span><input type="text"></p>
+                </li>
+                <li>
+                    <p><span>公司：</span><input type="text"></p>
+                </li>
+                <li>
+                    <p><input type="submit" value=""><label>确认修改</label></p>
+                </li>
+
+            </ul>
+
+        </div>
+    </main>
+    <footer id="footer">
+        <p>Copyright © 2016-2017 www.wfyvv.com</p>
+        <p>皖ICP备17002922号 更多模板：源码之家</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人博客主页</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/coment.css">
+    <link rel="stylesheet" type="text/css" href="css/page_style.css">
+    <script src="js/jQuery-2.2.0.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/monment.js"></script>
+    <style>
+        #bann {
+            width: 820px;
+            height: 250px;
+            margin-bottom: 10px;
+        }
+        
+        #bann-img>a>img {
+            width: 820px;
+        }
+        
+        .article ul {
+            width: 800px;
+        }
+        
+        .article {
+            width: 800px;
+            height: 150px;
+            background-color: #f2ffe5;
+            margin-bottom: 5PX;
+            padding: 5px 10px;
+        }
+        
+        .article-img {
+            width: 120px;
+            height: 120px;
+            padding-top: 20px;
+            float: left;
+        }
+        
+        .article-img>img {
+            width: 120px;
+            height: 100px;
+        }
+        
+        .article-content {
+            font-size: 16px;
+            width: 640px;
+            height: 140px;
+            margin-left: 20px;
+            float: right;
+        }
+        
+        .article-content>ul>li {
+            margin: 10px auto;
+        }
+        
+        .article-content>ul {
+            display: block;
+        }
+        
+        .title {
+            font-size: 18px;
+        }
+        
+        .article-info {
+            float: left;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #666666;
+        }
+        
+        .article-info span {
+            margin-right: 15px;
+        }
+        
+        .comment-info {
+            height: 20px;
+            float: right;
+            margin-bottom: 5px;
+        }
+        
+        .comment-info img {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <div id="header-content">
+            <nav id="nav">
+                <ul id="nav-ul">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="hot.html">热搜</a></li>
+                    <li><a href="goodArticle.html">推荐</a></li>
+                    <li><a href="sortArticle.html">分类</a></li>
+                    <li><a href="user.html">个人主页</a></li>
+                </ul>
+            </nav>
+            <div id="tags">
+                <span><a href="login.html"><img src="img/login.png"> 登录</a></span>
+                <span><a href="register.html"><img src="img/login.png"> 注册</a></span>
+            </div>
+        </div>
+    </header>
+    <div class="clear"></div>
+    <main id="main">
+        <div class="main-content">
+            <div id="bann">
+                <ul>
+                    <li id="bann-img">
+                        <a><img src="img/bann.png"></a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="article-ul" id="arc">
+                <li class="article" v-for="article in arc_data ">
+                    <div class="article-img"><img src="img/arcimg.PNG"></div>
+                    <div class="article-content">
+                        <!--                  动态传递文章id 固定url    +  #aid                                                        -->
+                        <h3 class="title"><a :href="'article_info.html#'+ article[0]">{{article[1]}}</a></h3>
+                        <div class="article-info">
+                            <span>{{article[6]}}</span>
+                            <span>{{article[5] |dateFormat}}</span>
+                            <span>{{article[3]}}</span>
+                        </div>
+                        <div class="comment-info">
+                            <span><img src="img/dianzan.png">&nbsp;:&nbsp;{{article[4]}}</span>
+                            <span><img src="img/comment.png">&nbsp;:&nbsp;{{comment_count}}</span>
+                        </div>
+                        <p class="clear"></p>
+                        <P>{{article[2] |ellipsis}}</P>
+                    </div>
+
+                </li>
+            </ul>
+            <div id="arc_page">
+                <div class="page" v-show="show">
+                    <div class="pagelist">
+                        <span class="jump" :class="{disabled:starts}" @click="{current_page--};post_arc()">上一页</span>
+                        <span v-show="current_page>5" class="jump" @click="jumpPage(1);post_arc()">1</span>
+                        <span class="ellipsis" v-show="efont">...</span>
+                        <span class="jump" v-for="num in indexs" :class="{bgprimary:current_page==num}" @click="jumpPage(num);post_arc()">{{num}}</span>
+                        <span class="ellipsis" v-show="ebehind">...</span>
+                        <!-- <span v-show="current_page>pages-4" class="jump" @click="jumpPage(pages)">{{}}</span> -->
+                        <span :class="{disabled:ends}" class="jump" @click="{current_page++};post_arc()">下一页</span><br>
+                        <span class="jumppoint">前往：</span>
+                        <span class="jumpinp"><input type="text" v-model="changePage"></span>
+                        <span class="jump gobtn" @click="jumpPage(changePage);post_arc()">GO</span>
+                        <span class="pageNum">第{{current_page||1}}页/共{{pages}}页</span>
+                        <!-- <span class="jump gobtn" @click="post_arc">跳转刷新</span> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="right-bar">
+            <div class="bav-search">
+                <input type="search"><button>搜索</button>
+            </div>
+
+            <div class="bav-div">
+                <h3>今日推荐</h3>
+                <hr>
+                <ol type="1" class="hot-put">
+                    <li>
+                        <a>阻止a标签href默认跳转事件<span> </a>
+                        <img src="image/comments.png"></span>
+                        <span>: 20</span>
+
+                    </li>
+                    <li>
+                        <a>阻止a标认跳转事件<span></a>
+                        <img src="image/comments.png"></span>
+                        <span>: 20</span>
+
+                    </li>
+                    <li>
+                        <a>阻止a标签href默认跳转事件<span></a>
+                        <img src="image/comments.png"></span>
+                        <span>: 20</span>
+
+                    </li>
+                    <li>
+                        <a>阻止f默认跳转事件<span></a>
+                        <img src="image/comments.png"></span>
+                        <span>: 20</span>
+
+                    </li>
+                    <li>
+                        <a>阻止a标签href默认跳转事件<span></a>
+                        <img src="image/comments.png"></span>
+                        <span>: 20</span>
+                    </li>
+                    <li>
+                        <a>阻止a标签转sscccccccccc事件<span></a>
+                        <img src="image/comments.png"></span>
+                        <span>: 20</span>
+                    </li>
+
+
+                </ol>
+            </div>
+            <div class="bav-div">
+                <ul class="arc-tags">
+                    <h3>全部分类</h3>
+                    <Li>pyhon</Li>
+                    <Li>pyhon</Li>
+                    <Li>pyhon</Li>
+                    <Li>pyhon</Li>
+                    <Li>pyhon</Li>
+                    <Li>pyhon</Li>
+                </ul>
+                </p>
+            </div>
+            <div class="bav-div">
+                <p>© 2020 今日头条</p>
+                <p>中国互联网举报中心 京ICP证140141号</p>
+                <p>京ICP备12025439号-3 网络文化经营许可证</p>
+                <p>营业执照</p>
+                <p>京-非经营性-2016-0081</p>
+                <p>互联网药品信息服务资格证书</p>
+                <p>跟帖评论自律管理承诺书</p>
+                <p>违法和不良信息举报：400-140-2108</p>
+                <p>举报邮箱：jubao@toutiao.com</p>
+
+            </div>
+        </div>
+
+    </main>
+    <!-- <footer id="footer">
+		<p>Copyright © 2016-2017 www.wfyvv.com</p>
+		<p>皖ICP备17002922号 更多模板：源码之家</p>
+    </footer> -->
+
+    <script type="text/javascript">
+        // 分页逻辑
+        var arc_page = new Vue({
+                el: '#arc_page',
+                data: {
+                    current_page: 1, //当前页
+                    pages: 50, //总页数
+                    changePage: '', //跳转页
+                    nowIndex: 0
+                },
+                computed: {
+                    // ...是否禁用上一页
+                    show: function() {
+                        return this.pages && this.pages != 1
+                    },
+                    // 开始
+                    starts: function() {
+                        return this.current_page == 1;
+                    },
+                    ends: function() {
+                        return this.current_page == this.pages;
+                    },
+                    // ...
+                    efont: function() {
+                        if (this.pages <= 7) return false;
+                        return this.current_page > 5
+                    },
+                    // 是否大于7
+                    ebehind: function() {
+                        if (this.pages <= 7) return false;
+                        var nowAy = this.indexs;
+                        return nowAy[nowAy.length - 1] != this.pages;
+                    },
+                    indexs: function() {
+                        var left = 1,
+                            right = this.pages,
+                            ar = [];
+                        if (this.pages >= 7) {
+                            if (this.current_page > 5 && this.current_page < this.pages - 4) {
+                                left = Number(this.current_page) - 2;
+                                right = Number(this.current_page) + 2;
+                            } else {
+                                if (this.current_page <= 5) {
+                                    left = 1;
+                                    right = 7;
+                                } else {
+                                    right = this.pages;
+                                    left = this.pages - 5;
+                                }
+                            }
+                        }
+                        while (left <= right) {
+                            ar.push(left);
+                            left++;
+                        }
+                        return ar;
+                    },
+                },
+                methods: {
+                    jumpPage: function(id) {
+                        if (id > this.pages) {
+                            id = this.pages
+                        }
+                        this.current_page = id;
+                    },
+                    post_arc: function() {
+                        $.ajax({
+                            type: "get",
+                            url: 'http://127.0.0.1:5000/main/arc_lists',
+                            contentType: " application/json;charset=utf-8 ",
+                            data: {
+                                page: this.current_page
+                            },
+                            dataType: " json ",
+                            success: function(rsp) {
+                                console.log(rsp.arc_data)
+                                if (rsp.code === 200) {
+                                    arc.arc_data = rsp.arc_data.arc_info
+                                }
+                            }
+                        });
+                    }
+                },
+            })
+            // 打开页面自动加载数据
+        var arc = new Vue({
+            el: "#arc",
+            data: {
+                page: arc_page.current_page,
+                arc_data: [
+                    551,
+                    "莫言散文集",
+                    "",
+                    "散",
+                    null,
+                    "Sun, 14 Oct 2012 00:19:00 GMT",
+                    "test456"
+                ],
+                comment_count: 0
+            },
+            methods: {
+
+            },
+            filters: {
+                // 字符串截取过滤器
+                ellipsis(value) {
+                    if (!value) return ''
+                    if (value.length > 120) {
+                        return value.slice(0, 120) + '...'
+                    }
+                    return value
+                },
+                //时间转换过滤器
+                dateFormat: function(value) {
+                    if (value === undefined) {
+                        return ''
+                    };
+                    return moment(value).format("YYYY-MM-DD HH:mm:ss")
+                },
+            },
+            created: function() {
+                // var name = $(" #username ").val();
+                $.ajax({
+                    type: "get",
+                    url: 'http://127.0.0.1:5000/main/arc_lists',
+                    contentType: " application/json;charset=utf-8 ",
+                    // data: JSON.stringify({
+                    //     page: 1
+                    // }),
+                    data: {
+                        page: 1
+                    },
+                    dataType: " json ",
+                    success: function(rsp) {
+                        console.log(rsp.arc_data)
+                        if (rsp.code === 200) {
+                            arc.arc_data = rsp.arc_data.arc_info
+                            arc_page.pages = rsp.arc_data.pages
+
+
+                        }
+
+                    }
+                });
+            }
+
+        })
+    </script>
+</body>
+
+</html>

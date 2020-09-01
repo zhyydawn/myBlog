@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user-index</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/coment.css">
+    <link rel="stylesheet" type="text/css" href="css/users.css">
+    <script src="js/jQuery-2.2.0.min.js"></script>
+    <script src="js/vue.js"></script>
+    <style>
+        #focus li {
+            height: 60px;
+            border-bottom: 1px solid rgb(190, 189, 189);
+        }
+        
+        #focus li img {
+            margin: 5PX auto;
+            width: 50px;
+            float: left;
+            border-radius: 50%;
+        }
+        
+        #focus li div {
+            float: left;
+            height: 50px;
+            line-height: 50px;
+            margin-left: 30PX;
+        }
+        
+        #focus li div:last-child {
+            margin-left: 500px;
+            width: 80px;
+            height: 30px;
+            border-radius: 10px;
+            border: red solid 1px;
+            text-align: center;
+            line-height: 30PX;
+            margin-top: 10PX;
+        }
+        
+        #focus li div:last-child:hover {
+            background-color: rgba(184, 179, 179, 0.2);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <div id="header-content">
+            <nav id="nav">
+                <ul id="nav-ul">
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="hot.html">热搜</a></li>
+                    <li><a href="goodArticle.html">推荐</a></li>
+                    <li><a href="sortArticle.html">分类</a></li>
+                    <li><a href="user.html">个人主页</a></li>
+                </ul>
+            </nav>
+            <div id="tags">
+                <span><a href="login.html"><img src="img/login.png"> 登录</a></span>
+                <span><a href="register.html"><img src="img/login.png"> 注册</a></span>
+            </div>
+        </div>
+    </header>
+    <div class="clear"></div>
+    <main id="main">
+        <div id="left-bar">
+            <h3><a href="user.html">个人主页</a></h3>
+            <ul id="bar-nav">
+                <li><a href="user.html">个人资料</a></li>
+                <li><a href="myarticle.html">我的文章</a></li>
+                <li><a href="mycomment.html">我的评论</a></li>
+                <li><a href="mycollection.html">我的收藏</a></li>
+                <li><a href="myfans.html">我的粉丝</a></li>
+                <li><a href="myfocus.html">我的关注</a></li>
+            </ul>
+        </div>
+        <div id="reight-bar">
+            <h1>我的粉丝</h1>
+            <hr>
+            <ul id="focus">
+                <li>
+                    <img src="img/touxiang.jpg">
+                    <div>xiaoyuandxy</div>
+                    <div>关注</div>
+                </li>
+                <li>
+                    <img src="img/touxiang.jpg">
+                    <div>xiaoyuandxy</div>
+                    <div>关注</div>
+                </li>
+                <li>
+                    <img src="img/touxiang.jpg">
+                    <div>xiaoyuandxy</div>
+                    <div>关注</div>
+                </li>
+
+            </ul>
+        </div>
+    </main>
+    <footer id="footer">
+        <p>Copyright © 2016-2017 www.wfyvv.com</p>
+        <p>皖ICP备17002922号 更多模板：源码之家</p>
+    </footer>
+</body>
+
+</html>

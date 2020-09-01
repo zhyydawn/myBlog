@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>login</title>
+    <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
+    <meta name="author" content="Vincent Garreau" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" media="screen" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/reset1.css" />
+</head>
+
+<body>
+    <!-- 登录操作，输入账号，密码，请求数据，成功后返回token -->
+    <div id="particles-js">
+        <div class="login">
+            <div class="login-top">
+                登录
+            </div>
+            <div class="home"><a href="index.html" title="返回首页">首页</a></div>
+            <div class="login-center clearfix">
+                <div class="login-center-img"><img src="img/name.png" /></div>
+                <div class="login-center-input">
+                    <input type="text" id="name" value="" placeholder="请输入您的用户名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'" />
+                    <div class="login-center-input-text">用户名</div>
+                </div>
+            </div>
+            <div class="login-center clearfix">
+                <div class="login-center-img"><img src="img/password.png" /></div>
+                <div class="login-center-input">
+                    <input type="password" id="password" value="" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'" />
+                    <div class="login-center-input-text">密码</div>
+                </div>
+            </div>
+            <div class="login-register"><a href="register.html">没有账号,立马创建</a></div>
+            <div class="login-button" id="loginButton">
+                <a>登录</a>
+            </div>
+        </div>
+        <div class="sk-rotating-plane"></div>
+    </div>
+
+    <!-- scripts -->
+    <script src="js/particles.min.js"></script>
+    <script src="js/jQuery-2.2.0.min.js"></script>
+    <script src="js/app.js"></script>
+    <!--导入uuid 生产函数 -->
+    <script src="js/gener_uuid.js"></script>
+    <script type="text/javascript">
+        //页面背景控制js
+        function hasClass(elem, cls) {
+            cls = cls || '';
+            if (cls.replace(/\s/g, '').length == 0) return false; //当cls没有参数时，返回false
+            return new RegExp(' ' + cls + ' ').test(' ' + elem.className + ' ');
+        }
+
+        function addClass(ele, cls) {
+            if (!hasClass(ele, cls)) {
+                ele.className = ele.className == '' ? cls : ele.className + ' ' + cls;
+            }
+        }
+
+        function removeClass(ele, cls) {
+            if (hasClass(ele, cls)) {
+                var newClass = ' ' + ele.className.replace(/[\t\r\n]/g, '') + ' ';
+                while (newClass.indexOf(' ' + cls + ' ') >= 0) {
+                    newClass = newClass.replace(' ' + cls + ' ', ' ');
+                }
+                ele.className = newClass.replace(/^\s+|\s+$/g, '');
+            }
+        }
+
+        //登录接口
+        loginButton.onclick = function() {
+            var name = $("#name").val(); //获取用户名
+            var password = $("#password").val(); //获取密码
+            var uuid = generateUUID(); //获取uuid标识
+            window.localStorage.setItem('uuid', uuid) //把uuid保存到全局对象中
+            $.ajax({
+                type: "post",
+                url: 'http://127.0.0.1:5000/auth/get_token',
+                contentType: "application/json;charset=utf-8",
+                data: JSON.stringify({
+                    name: name,
+                    password: password,
+                    uuid: uuid
+                }),
+                dataType: "json",
+                //接受返回参数
+                success: function(data) {
+                    // console.log(data.t.token);
+                    console.log("code：" + data.code); //打印状态码
+                    if (data.code === 200) {
+                        alert("登录成功");
+                        const token = data.t.token //获取后端返回的token
+                        window.localStorage.setItem('token', token) //保存token到全局对象
+                        window.location.href = "index.html" //登录成功返回主页
+                    };
+                    //异常处理
+                    if (data.code === 1002 || data.code === 1003) {
+                        alert("登录失败，请确认账号密码是否正确或者存在")
+                        window.location.href = "login.html"
+                    }
+                    if (data.code === 5001) {
+                        alert("网络不稳定，请稍后重试")
+                        window.location.href = "login.html"
+                    }
+                }
+            });
+        }
+
+        // $(document).ready(function(){
+        //   $(".login-button").click(function(){
+        //     alert("test");
+        //   }); 
+        // });
+        /*
+        	
+        		document.querySelector(".login-button").onclick = function(){
+        				addClass(document.querySelector(".login"), "active")
+        				setTimeout(function(){
+        					addClass(document.querySelector(".sk-rotating-plane"), "active")
+        					document.querySelector(".login").style.display = "none"
+        				},800)
+        				setTimeout(function(){
+        					removeClass(document.querySelector(".login"), "active")
+        					removeClass(document.querySelector(".sk-rotating-plane"), "active")
+        					document.querySelector(".login").style.display = "none"
+        					alert("登录成功")
+        					
+        				},5000)
+        		}
+        */
+    </script>
+    <!-- <script>
+new Vue({
+	el:'#particles-js',
+	data:{
+		name:'',
+		password:''
+	},
+	methods:{
+	function(){
+      $.ajax({
+                 type: "post",
+                 url: 'http://127.0.0.1:5000/auth/login',
+                 contentType: "application/json;charset=utf-8",
+                 data: JSON.stringify({name:this.name,password:this.password}),
+                 dataType: "json",
+                 success: function (data) {
+                     console.log(data);
+                 }
+             });
+		}
+
+	}
+})
+</script> -->
+</body>
+
+</html>
